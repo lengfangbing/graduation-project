@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --config webpack.dev.config.js",
-    "poststart": "echo \"\\033[30m I need to build to save your code \\033[0m\" \n npm run build",
+    "poststart": "npm run build",
+    "dev": "npm install && npm run start",
     "build": "webpack webpack.config.js"
   },
   "author": "lengfangbing",
