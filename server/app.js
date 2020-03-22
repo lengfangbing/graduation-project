@@ -1,7 +1,7 @@
 const path = require('path');
 const Koa = require("koa");
 const app = new Koa();
-const indexRouter = require('./routes/index');
+const useRouter = require('./routes/index');
 const cors = require("koa2-cors");
 const static = require('koa-static');
 const body = require('koa-body');
@@ -17,14 +17,11 @@ app.use(
     allowHeaders: ["Content-Type", "Authorization", "Accept"]
   })
 );
-app.use(async (ctx, next) => {
-  await next();
-})
 app.use(static(path.join(__dirname, '../')));
 app.use(body({
   multipart: true
 }));
-app.use(indexRouter.routes(), indexRouter.allowedMethods());
+useRouter(app);
 app.listen(3000, () => {
-  console.log(3000);
+  console.log('server is running at 3000');
 })
