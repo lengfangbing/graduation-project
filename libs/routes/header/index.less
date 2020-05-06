@@ -1,0 +1,43 @@
+.header{
+	width: 100%;
+	height: 56px;
+	position: fixed;
+	top: 0;
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+	padding: 0 40px;
+	background-color: rgba(82, 169, 211, 0.5);
+	&-content{
+		box-sizing: border-box;
+		padding: 0 20px;
+		display: flex;
+		width: 100%;
+		align-items: center;
+		justify-content: space-between;
+		.title{
+			margin: 0;
+		}
+		.message{
+			display: flex;
+			align-items: center;
+			.user-name{
+				display: inline-block;
+				margin-right: 20px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				max-width: 150px;
+			}
+			a{
+				transition: all .3s linear 0s;
+				color: rgb(15, 13, 29);
+				text-decoration: none;
+				margin-right: 30px;
+				&:hover{
+					color: rgb(211, 97, 21);
+				}
+			}
+		}
+	}
+}

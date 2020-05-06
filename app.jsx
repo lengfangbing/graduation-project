@@ -1,21 +1,22 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import Index from '@/index';
-import { Provider } from 'mobx-react';
-import store from '@/store';
+import React, { Component } from "react";
+import { render } from "react-dom";
+import Index from "@/index";
+import { Provider } from "mobx-react";
+import store from "@/store";
 
-class App extends Component{
-	constructor(props){
-		super(props);
-	}
+import "./app.less";
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
 
-	render(){
-		return <Provider store={store}>
-			<Index/>
-		</Provider>;
-	} 
+  render() {
+    return (
+      <Provider {...store}>
+        <Index />
+      </Provider>
+    );
+  }
 }
 
-
-
-render(<App/>, document.getElementById('main'));
+render(<App />, document.getElementById("main"));

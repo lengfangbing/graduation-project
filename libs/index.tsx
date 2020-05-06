@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
-import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
+import Header from '@/routes/header';
+import Navigation from '@/routes/navigation';
+import Content from '@/routes';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './index.less';
-interface Props{
-	store: any
-}
-@inject('store')
-@observer
-class Index extends Component<Props>{
+class Index extends Component {
 
-	constructor(props){
-		super(props);
-	}
-
-	render(){
-		const { userStore } = this.props.store;
-		return <Router>
-			<div className="content">
-				
-			</div>
-		</Router>;
+	render() {
+		return (
+			<Router>
+				<div className="content">
+					<Header />
+					<div className="content-wrapper">
+						<Navigation />
+						<Content />
+					</div>
+				</div>
+			</Router>
+		);
 	}
 }
 
