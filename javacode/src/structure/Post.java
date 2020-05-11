@@ -1,6 +1,6 @@
 package structure;
 
-import java.util.HashMap;
+import java.util.*;
 
 /*
  * 帖子结构体
@@ -15,8 +15,10 @@ public class Post implements Request,Response{
 	private boolean success;
 	private int state;
 	
+	private ArrayList<Reply> replys;
 	public Post() {
 		state = 0;
+		replys = new ArrayList<>();
 	}
 	
 	public void initValue(int userId,int postId,String postTitle,
@@ -102,13 +104,21 @@ public class Post implements Request,Response{
 		return true;
 	}
 
-	private class reply{
-		int userId;
-		String replyContent;
-		boolean success;
-		
+	
+	
+	public String[] getReplyRequestPara() {
+		return new Reply().getRequestPara();
 	}
-
+	
+	public String addReply(String userId,String replyContent) {
+		Reply p = new Reply();
+		p.setUserId(Integer.valueOf(userId));
+		p.setReplyContent(replyContent);
+		replys.add(p);
+		p.saveReplyValue();
+		return p.getResponsePara();
+	}
+	
 	public void initValue(String[] paras) {
 		initValue(
 				Integer.valueOf(paras[0]),Integer.valueOf(paras[1]),paras[2],paras[3],paras[4],paras[5]);

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import structure.Reply;
+
 /**
  * Servlet implementation class ReplyServerlet
  */
@@ -27,7 +29,15 @@ public class ReplyServerlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		Reply p = new Reply();
+		String[] ps = p.getRequestPara();
+		String[] paras = new String[ps.length];
+		for(int i=0;i<ps.length;i++) {
+			paras[i] = request.getParameter(ps[i]);
+		}
+		p.initValue(paras);
+		p.saveReplyValue();
+		response.getWriter().write(p.getResponsePara());
 	}
 
 	/**
