@@ -43,7 +43,7 @@ public class PostingServerlet extends HttpServlet {
 			paras[i] = request.getParameter(ps[i]);
 		}
 		p.initValue(paras);
-		p.savePostValue();
+		p.saveValue();
 		response.getWriter().write(p.getResponsePara());
 	}
 

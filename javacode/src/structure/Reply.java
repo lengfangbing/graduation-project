@@ -2,7 +2,7 @@ package structure;
 
 
 
-public class Reply implements Request,Response{
+public class Reply implements Structure{
 	
 	private int postId;
 	private int userId;
@@ -51,7 +51,7 @@ public class Reply implements Request,Response{
 		this.success = success;
 	}
 
-	public void saveReplyValue() {
+	public void saveValue() {
 		
 	}
 

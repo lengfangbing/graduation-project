@@ -5,7 +5,7 @@ import java.util.*;
 /*
  * 帖子结构体
  * */
-public class Post implements Request,Response{
+public class Post implements Structure{
 	private int userId;
 	private int postId;
 	private String postTitle;
@@ -99,9 +99,10 @@ public class Post implements Request,Response{
 		this.state = state;
 	}
 	
-	public boolean savePostValue(){
+	@Override
+	public void saveValue(){
 		
-		return true;
+		
 	}
 
 	
@@ -115,7 +116,7 @@ public class Post implements Request,Response{
 		p.setUserId(Integer.valueOf(userId));
 		p.setReplyContent(replyContent);
 		replys.add(p);
-		p.saveReplyValue();
+		p.saveValue();
 		return p.getResponsePara();
 	}
 	

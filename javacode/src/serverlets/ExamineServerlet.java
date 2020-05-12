@@ -7,19 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import structure.Reply;
+import structure.Examine;
 
 /**
- * Servlet implementation class ReplyServerlet
+ * Servlet implementation class ExamineServerlet
  */
-@WebServlet("/reply")
-public class ReplyServerlet extends HttpServlet {
+@WebServlet("/check")
+public class ExamineServerlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReplyServerlet() {
+    public ExamineServerlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,15 +29,15 @@ public class ReplyServerlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Reply p = new Reply();
-		String[] ps = p.getRequestPara();
+		Examine e =new Examine();
+		String[] ps = e.getRequestPara();
 		String[] paras = new String[ps.length];
 		for(int i=0;i<ps.length;i++) {
 			paras[i] = request.getParameter(ps[i]);
 		}
-		p.initValue(paras);
-		p.saveValue();
-		response.getWriter().write(p.getResponsePara());
+		e.initValue(paras);
+		e.saveValue();
+		response.getWriter().write(e.getResponsePara());
 	}
 
 	/**
