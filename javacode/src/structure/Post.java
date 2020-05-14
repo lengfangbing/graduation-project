@@ -2,6 +2,8 @@ package structure;
 
 import java.util.*;
 
+import util.MysqlHelper;
+
 /*
  * 帖子结构体
  * */
@@ -14,6 +16,8 @@ public class Post implements Structure{
 	private String time;
 	private boolean success;
 	private int state;
+	
+	private static String tablename = "";
 	
 	private ArrayList<Reply> replys;
 	public Post() {
@@ -101,8 +105,23 @@ public class Post implements Structure{
 	
 	@Override
 	public void saveValue(){
+		ArrayList<String> collist = new ArrayList<>();
+		ArrayList<String> valuelist = new ArrayList<>();
+		collist.add("userId");
+		collist.add("postId");
+		collist.add("postTitle");
+		collist.add("postContent");
+		collist.add("postHTML");
+		collist.add("time");
 		
+		valuelist.add(String.valueOf(userId));
+		valuelist.add(String.valueOf(postId));
+		valuelist.add(postTitle);
+		valuelist.add(postContent);
+		valuelist.add(postHTML);
+		valuelist.add(time);
 		
+		success = MysqlHelper.addValueToTable(tablename, collist, valuelist);
 	}
 
 	
@@ -127,13 +146,19 @@ public class Post implements Structure{
 	
 	@Override
 	public String getResponsePara() {
-		// TODO Auto-generated method stub
-		return null;
+		String re = "{\nuserId:"+userId+
+				",\npostId:"+postId+
+				",\nsuccess:"+success+
+				",\nstate:"+state+
+				"}";
+		
+		return re;
 	}
 	@Override
 	public String[] getRequestPara() {
 		// TODO Auto-generated method stub
-		return null;
+		String[] re = {"userId","postId","postTitle","postContent","postHTML","time"};
+		return re;
 	}
 
 	

@@ -1,6 +1,8 @@
 package structure;
 
+import java.util.ArrayList;
 
+import util.MysqlHelper;
 
 public class Reply implements Structure{
 	
@@ -8,6 +10,8 @@ public class Reply implements Structure{
 	private int userId;
 	private String replyContent;
 	private boolean success;
+	
+	private static String tablename = "";
 	
 	public void initValue(int postId,int userId,String replyContent) {
 		this.postId = postId;
@@ -52,19 +56,32 @@ public class Reply implements Structure{
 	}
 
 	public void saveValue() {
+		ArrayList<String> collist = new ArrayList<>();
+		ArrayList<String> valuelist = new ArrayList<>();
+		collist.add("userId");
+		collist.add("postId");
+		collist.add("replyContent");
 		
+		valuelist.add(String.valueOf(userId));
+		valuelist.add(String.valueOf(postId));
+		valuelist.add(replyContent);
+		
+		success = MysqlHelper.addValueToTable(tablename, collist, valuelist);
 	}
 
 	@Override
 	public String getResponsePara() {
-		// TODO Auto-generated method stub
-		return null;
+		String re = "{\nuserId:"+userId+
+				",\npostId:"+postId+
+				",\nsuccess:"+success+
+				"}";
+		return re;
 	}
 
 	@Override
 	public String[] getRequestPara() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] re = {"userId","postId","replyContent"};
+		return re;
 	}
 	
 	@Override
