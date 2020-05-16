@@ -8,7 +8,7 @@ Mongo.config({
 });
 module.exports = new Mongo({
   user: {
-    userName: {
+    name: {
       type: String,
       required: true,
       unique: true
@@ -22,12 +22,38 @@ module.exports = new Mongo({
     password: {
       type: String,
       required: true
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      index: true
-    }
-  }
+		},
+		auth: {
+			type: Number,
+			default: 0
+		}
+	},
+	invitation: {
+		title: {
+			type: String,
+			required: true,
+			unique: true
+		},
+		content: {
+			type: String,
+			required: true
+		},
+		author: {
+			type: String,
+			required: true
+		},
+		authorId: {
+			type: Number,
+			required: true
+		},
+		invitationId: {
+			type: Number,
+			required: true
+		},
+		status: {
+			type: Number,
+			required: true,
+			default: 0
+		}
+	}
 });

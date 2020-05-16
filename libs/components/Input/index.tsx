@@ -19,6 +19,9 @@ function Input({
 	const [isError, setIsError] = useState(isRegExp(verify) && !verify.test(value) ? true : false);
 	const ref = useRef();
 	const textChangeFunc = function (e: FormEvent<HTMLInputElement>) {
+		if(disabled){
+			return;
+		}
 		const target = e.target;
 		// @ts-ignore
 		const value = target.value;
@@ -55,10 +58,12 @@ function Input({
 			value={textValue}
 			error={isError}
 			onInput={textChangeFunc}
+			onChange={() => {}}
 			placeholder={placeholder}
 			outerWidth={outerWidth}
-			outerHeight={outerHeight} />
-		{textValue.length > 0 ?
+			outerHeight={outerHeight} 
+			disabled={disabled} />
+		{textValue.length > 0 && controls && !disabled ?
 			<svg
 				onClick={clearInputValueFunc}
 				viewBox="0 0 1024 1024"

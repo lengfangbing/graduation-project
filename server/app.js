@@ -5,10 +5,11 @@ const useRouter = require('./routes/index');
 const cors = require("koa2-cors");
 const static = require('koa-static');
 const body = require('koa-body');
+const port = 3000;
 app.use(
   cors({
     origin: function(ctx) {
-      return "http://localhost:8080";
+      return "http://127.0.0.1:5000";
     },
     exposeHeaders: ["WWW-Authenticate", "Server-Authorization"],
     maxAge: 5,
@@ -22,6 +23,6 @@ app.use(body({
   multipart: true
 }));
 useRouter(app);
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log('server is running at 3000');
 })

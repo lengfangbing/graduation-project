@@ -66,3 +66,11 @@ http://127.0.0.1:8080/post/check        POST
 }
 */
 ```
+
+**最关键的部分, Java解决跨域的问题**
+<h2>
+使用cors进行设置跨域, 跨域本质是因为host, ip, port其中一个不同, 那么就会拒绝该请求, 但是配置了cors, 
+就可以设置access-allow-origin: *, 表示允许所有host, ip, port的请求.
+access-allow-methods: PUT, DELETE, GET, POST, 表示允许的请求method
+等等...
+</h2>

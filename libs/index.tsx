@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '@/routes/header';
 import Navigation from '@/routes/navigation';
 import Content from '@/routes';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import './index.less';
 class Index extends Component {
 

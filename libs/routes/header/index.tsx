@@ -16,7 +16,7 @@ class Header extends Component<Props>{
 		super(props);
 	}
 
-	renderNotLogin(userStore) {
+	renderNotLogin() {
 		return (
 			<Link to='/login'>登录/注册</Link>
 		);
@@ -24,14 +24,22 @@ class Header extends Component<Props>{
 
 	renderLogined(userStore) {
 		return (
-			<div className='message'>
+			<div className='header-message'>
 				<span className='user-name'>欢迎您: {userStore.userName}</span>
-				<Link to='/usercenter'>
-					{userStore.userAuth == 1 ? '管理中心' : '个人中心'}
-				</Link>
-				<Link to='/message'>
-					消息中心
+				{
+					userStore.userAuth === 1
+						? null
+						: <Link to='/userCenter'>
+							个人中心
 					</Link>
+				}
+				{
+					userStore.userAuth === 1
+						? null
+						: <Link to='/message'>
+							消息中心
+						</Link>
+				}
 			</div>
 		);
 	}
@@ -45,7 +53,7 @@ class Header extends Component<Props>{
 					{
 						userStore.userId
 							? this.renderLogined(userStore)
-							: this.renderNotLogin(userStore)
+							: this.renderNotLogin()
 					}
 				</div>
 			</div>

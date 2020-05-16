@@ -38,12 +38,13 @@ const stylesMap = {
         }
     `,
     basic: css`
-        width: ${(props: { outerWidth, outerHeight }) => props.outerWidth};
-        height: ${(props: { outerWidth, outerHeight }) => props.outerHeight};
+        width: ${(props: { outerWidth, outerHeight, disabled }) => props.outerWidth};
+				height: ${(props: { outerWidth, outerHeight, disabled }) => props.outerHeight};
+				cursor: ${(props: { outerWidth, outerHeight, disabled }) => props.disabled ? 'default' : ''};
         border: 1px solid rgb(129, 139, 132);
         box-shadow: 0 0 0 transparent;
         &:hover{
-            border: 1px solid rgb(63, 72, 250);
+					${(props: { outerWidth, outerHeight, disabled }) => props.disabled ? '' : 'border: 1px solid rgb(63, 72, 250);'};
         }
         &:focus{
             border: 1px solid rgb(63, 72, 250);

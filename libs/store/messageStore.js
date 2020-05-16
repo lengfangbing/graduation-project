@@ -1,11 +1,11 @@
 import { observable, action } from 'mobx';
 
-class ListStore{
+class MessageStore{
 	@observable list = [];
 
 	@action.bound
-	setList(val){
-		this.list = val;
+	setList(v){
+		this.list = v;
 	}
 	@action.bound
 	resetList(){
@@ -13,4 +13,4 @@ class ListStore{
 	}
 }
 
-export default new ListStore();
+export default new MessageStore();

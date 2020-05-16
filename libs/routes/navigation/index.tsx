@@ -23,11 +23,12 @@ class Navigation extends Component<Props>{
 				: null
 		);
 	}
+
 	render() {
 		return (
 			<div className="navigation">
-				<Link to={'/publish'} >我要发帖</Link>
-				<Link to={'/checkMy'} >我的帖子</Link>
+				<Link to={'/publish'}>我要发帖</Link>
+				<Link to={'/checkMy'}>我的帖子</Link>
 				<Link to={'/'} >查看帖子</Link>
 				{this.renderAdminOpera()}
 			</div>
