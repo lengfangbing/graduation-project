@@ -85,11 +85,4 @@ class Check extends Component<Props, State>{
 	}
 
 }
-/**
- * <Item config={{ html: '12345<p>5555</p>' }} />
-					<Item config={{ html: '12345<p>5555</p>' }} />
-					<Item config={{ html: '12345<p>5555</p>' }} />
-					<Item config={{ html: '12345<p>5555</p>' }} />
-					<Item config={{ html: '12345<p>5555</p>' }} />
- */
 export default Check;

@@ -1,0 +1,41 @@
+.item{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	border: 1px solid rgba(26, 23, 23, 0.315);
+	border-radius: 8px;
+	background-color: rgba(255, 255, 255, 0.658);
+	box-sizing: border-box;
+	padding: 10px;
+	margin-top: 30px;
+	&:first-child{
+		margin-top: 0;
+	}
+	&-title{
+		padding: 10px 0;
+		border-bottom: 1px solid rgb(197, 153, 211);
+	}
+	&-content{
+		padding: 10px 0;
+		border-bottom: 1px solid rgb(197, 153, 211);
+		p{
+			margin: 0;
+		}
+	}
+	&-commet{
+		padding: 10px 0;
+		overflow: auto;
+		max-height: 200px;
+		margin-top: 10px;
+	}
+	textarea{
+		margin-top: 10px;
+		resize: none;
+		font-size: 14px;
+	}
+	button{
+		width: 55px;
+		margin-top: 10px;
+	}
+}

@@ -204,7 +204,7 @@ class Login extends Component<Props, State> {
   render() {
     const { type } = this.state;
     const { userId } = this.props.userStore;
-    if (userId !== '') {
+    if (userId) {
       history.replace('/')
     }
     return (

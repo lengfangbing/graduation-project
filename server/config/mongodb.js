@@ -55,5 +55,27 @@ module.exports = new Mongo({
 			required: true,
 			default: 0
 		}
+	},
+	commet: {
+		invitationId: {
+			type: Number,
+			required: true
+		},
+		authorId: {
+			type: Number,
+			required: true
+		},
+		userId: {
+			type: Number,
+			required: true
+		},
+		reply: {
+			type: String,
+			required: true
+		},
+		author: {
+			type: String,
+			required: true
+		}
 	}
 });

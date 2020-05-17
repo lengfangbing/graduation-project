@@ -5,38 +5,85 @@ import './index.less';
 
 interface Props {
 	listStore?: any
+	userStore?: any
 }
-@inject('listStore')
+interface State{
+	list: any[]
+}
+@inject('listStore', 'userStore')
 @observer
-class Invitation extends Component<Props>{
+class Invitation extends Component<Props, State>{
 
 	constructor(props) {
 		super(props);
+		this.state = {
+			list: []
+		}
 	}
 
-	componentWillUnmount(){
-		const { resetList } = this.props.listStore;
-		resetList();
+	componentDidMount(){
+		this.getList();
+	}
+
+	getList(){
+		const { getList } = this.props.listStore;
+		getList()
+			.then(res => {
+				if(res){
+					this.setState({
+						list: res
+					})
+				}
+			})
+	}
+
+	sendCommet(config, reply){
+		const { postCommet } = this.props.listStore;
+		const { userId, userName } = this.props.userStore;
+		const { invitationId, authorId } = config;
+		if(!userId){
+			return alert('请先登录');
+		}
+		postCommet({
+			author: userName,
+			invitationId: invitationId,
+			authorId: authorId,
+			userId,
+			reply
+		})
+			.then(res => {
+				console.log(res);
+			})
+	}
+
+	replyClick(reply, config){
+		this.sendCommet(config, reply);
 	}
 
 	render() {
+		const { list } = this.state;
 		return (
 			<div className='invitation'>
 				<div className="invitation-wrapper">
-					
+					{
+						list.map(val => {
+							return (
+								<Item
+									key={val.invitationId}
+									config={{
+										title: `${val.title}  -- ${val.author}`,
+										html: val.content,
+										id: val.invitationId
+									}}
+									onClick={(reply) => this.replyClick(reply, val)}
+								/>
+							);
+						})
+					}
 				</div>
 			</div>
 		);
 	}
 
 }
-
-/**
- * 
- * <Item config={{ author: 'lfb', html: '12345<p>5555</p>' }} />
-					<Item config={{ author: 'lfb', html: '12345<p>5555</p>' }} />
-					<Item config={{ author: 'lfb', html: '12345<p>5555</p>' }} />
-					<Item config={{ author: 'lfb', html: '12345<p>5555</p>' }} />
-					<Item config={{ author: 'lfb', html: '12345<p>5555</p>' }} />
- */
 export default Invitation;

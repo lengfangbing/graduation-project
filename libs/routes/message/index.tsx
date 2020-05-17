@@ -31,7 +31,7 @@ class Message extends Component<Props, State>{
 
 	render(){
 		const { userId } = this.props.userStore;
-		if(userId === ''){
+		if(!userId){
 			return null;
 		}
 		return (

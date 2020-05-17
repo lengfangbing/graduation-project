@@ -2,10 +2,10 @@ import { observable, action } from 'mobx';
 import { fetchAPI } from '@/utils';
 
 class UserStore{
-	@observable userId = 110;
-	@observable userName = 'admin';
-	@observable userAuth = 1;
-	@observable password = 'admin'
+	@observable userId = 0;
+	@observable userName = '';
+	@observable userAuth = 0;
+	@observable password = ''
 
 	@action.bound
 	setUserId(v){

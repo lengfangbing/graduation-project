@@ -90,7 +90,7 @@ class UserCenter extends Component<Props, State>{
 	render(){
 		const { isEdit, inputValue } = this.state;
 		const { userId, userName, userPassword } = inputValue;
-		if(userId === ''){
+		if(!userId){
 			return null;
 		}
 		return (

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Button from '@/components/Button';
 import './item.less';
 interface Props {
-	config: {[key: string]: string | number | boolean},
-	onClick: Function
+	config: {[key: string]: string | number | boolean}
 }
 interface State {
 	commet: string
@@ -29,15 +27,6 @@ class Item extends Component<Props, State>{
 		})
 	}
 
-	replayClick = () => {
-		const { config, onClick } = this.props;
-		const { commet } = this.state;
-		if(commet.trim() === ''){
-			return alert('请输入回复内容');
-		};
-		onClick(commet);
-	}
-
 	render(){
 		const { config } = this.props;
 		const { title } = config;
@@ -53,15 +42,6 @@ class Item extends Component<Props, State>{
 					<div className="item-wrapper">
 					</div>
 				</div>
-				<textarea
-					rows={4}
-					placeholder="请输入回复"
-					onChange={this.commetChange}
-				></textarea>
-				<Button
-					disabled={!commet}
-					onClick={this.replayClick}
-				>回复</Button>
 			</div>
 		);
 	}
