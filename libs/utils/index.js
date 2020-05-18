@@ -6,7 +6,7 @@ export function fetchAPI(url, { method = 'GET', data }){
 		axios.request({
 			url,
 			method,
-			data
+			data,
 		})
 		.then(res => resolve(res && res.data))
 		.catch(e => reject(e));

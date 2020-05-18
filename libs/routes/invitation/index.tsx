@@ -13,7 +13,6 @@ interface State{
 @inject('listStore', 'userStore')
 @observer
 class Invitation extends Component<Props, State>{
-
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -45,7 +44,7 @@ class Invitation extends Component<Props, State>{
 			return alert('请先登录');
 		}
 		postCommet({
-			author: userName,
+			user: userName,
 			invitationId: invitationId,
 			authorId: authorId,
 			userId,

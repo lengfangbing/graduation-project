@@ -53,16 +53,16 @@ module.exports = (router, mongo) => {
     }
 	});
 	router.post('/reply', async ctx => {
-		const { invitationId, authorId, userId, reply, author } = ctx.request.body;
+		const { invitationId, authorId, userId, reply, user } = ctx.request.body;
 		const res = await mongo.insert('commet', {
-			invitationId, authorId, userId, reply, author
+			invitationId, authorId, userId, reply, user
 		});
 		if (res.status) {
       ctx.body = {
         code: 1,
 				message: '回帖成功',
 				data: {
-					author,
+					user,
 					reply
 				}
       }

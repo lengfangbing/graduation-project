@@ -11,16 +11,19 @@ app.use(
     origin: function(ctx) {
       return "http://127.0.0.1:5000";
     },
-    exposeHeaders: ["WWW-Authenticate", "Server-Authorization"],
     maxAge: 5,
     credentials: true,
     allowMethods: ["GET", "POST", "DELETE", "PUT", "OPTIONS"],
-    allowHeaders: ["Content-Type", "Authorization", "Accept"]
+    allowHeaders: ["Content-Type", "Authorization"]
   })
 );
 app.use(static(path.join(__dirname, '../')));
 app.use(body({
-  multipart: true
+  multipart: true,
+  jsonLimit: 10000000,
+  formidable: {
+    maxFieldsSize: 1000 * 1024 * 1024
+  }
 }));
 useRouter(app);
 app.listen(port, () => {

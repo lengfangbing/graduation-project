@@ -73,7 +73,7 @@ module.exports = new Mongo({
 			type: String,
 			required: true
 		},
-		author: {
+		user: {
 			type: String,
 			required: true
 		}
