@@ -78,4 +78,6 @@ access-allow-methods: PUT, DELETE, GET, POST, 表示允许的请求method
 参考网址: </br>
 https://blog.csdn.net/wudinaniya/article/details/78712469 </br>
 https://www.jianshu.com/p/a898c53dd96b </br>
+实现的本质是在response header里面加上</br>
+Access-Control-Allow-Origin: '*'
 </h2>
