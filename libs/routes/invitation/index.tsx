@@ -72,7 +72,8 @@ class Invitation extends Component<Props, State>{
 									config={{
 										title: `${val.title}  -- ${val.author}`,
 										html: val.content,
-										id: val.invitationId
+										id: val.invitationId,
+                    commets: val.commets
 									}}
 									onClick={(reply) => this.replyClick(reply, val)}
 								/>

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Button from '@/components/Button';
 import './item.less';
 interface Props {
-	config: {[key: string]: string | number | boolean},
+	config: {[key: string]: any},
 	onClick: Function
 }
 interface State {
@@ -40,7 +40,7 @@ class Item extends Component<Props, State>{
 
 	render(){
 		const { config } = this.props;
-		const { title } = config;
+		const { title, commets } = config;
 		const { commet } = this.state;
 		return (
 			<div className="item">
@@ -51,6 +51,15 @@ class Item extends Component<Props, State>{
 				</div>
 				<div className="item-commet">
 					<div className="item-wrapper">
+            {
+              commets.map(val => {
+                return (
+                  <p className="commet" key={val._id} >
+                    {val.user}回复了你: {val.reply}
+                  </p>
+                );
+              })
+            }
 					</div>
 				</div>
 				<textarea

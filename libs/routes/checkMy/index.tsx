@@ -60,7 +60,8 @@ class CheckMy extends Component<Props, State>{
 									config={{
 										title: `${val.title}  -- ${val.author}`,
 										html: val.content,
-										id: val.invitationId
+										id: val.invitationId,
+                    commets: val.commets
 									}}
 								/>
 							);
