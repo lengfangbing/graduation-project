@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2 start server/app.js -i 4",
+    "build": "webpack webpack.config.js",
+    "start": "npm run build && npm run start:watch",
     "dev": "webpack-dev-server --config webpack.dev.config.js",
     "stop": "pm2 stop server/app.js",
     "restart": "yarn stop && yarn start",
-    "start:watch": "node server/app.js"
+    "start:watch": "pm2 start server/app.js"
   },
   "author": "lengfangbing",
   "license": "ISC",

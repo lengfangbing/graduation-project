@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const resolve = path.resolve;
 
 module.exports = {
-  mode: "development",
+  mode: "production",
   entry: {
     main: resolve(__dirname, "./app.jsx"),
   },
