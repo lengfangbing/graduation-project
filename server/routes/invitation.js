@@ -97,7 +97,10 @@ module.exports = (router, mongo) => {
         message: '回帖成功',
         data: {
           user,
-          reply
+          reply,
+          invitationId,
+          authorId,
+          userId
         }
       }
     } else {

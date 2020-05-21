@@ -5,6 +5,9 @@ const useRouter = require('./routes/index');
 const cors = require("koa2-cors");
 const static = require('koa-static');
 const body = require('koa-body');
+const server = require('http').createServer(app.callback());
+const socket = require('./socket');
+socket(server);
 const port = 3000;
 app.use(
   cors({
@@ -26,6 +29,6 @@ app.use(body({
   }
 }));
 useRouter(app);
-app.listen(port, () => {
+server.listen(port, () => {
   console.log('server is running at 3000');
 })

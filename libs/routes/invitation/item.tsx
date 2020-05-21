@@ -52,9 +52,9 @@ class Item extends Component<Props, State>{
 				<div className="item-commet">
 					<div className="item-wrapper">
             {
-              commets.map(val => {
+              commets.map((val, index) => {
                 return (
-                  <p className="commet" key={val._id} >
+                  <p className="commet" key={index} >
                     {val.user}回复了你: {val.reply}
                   </p>
                 );
