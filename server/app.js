@@ -12,7 +12,7 @@ const port = 3000;
 app.use(
   cors({
     origin: function(ctx) {
-      return "http://127.0.0.1:5000";
+      return '*';
     },
     maxAge: 5,
     credentials: true,
