@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import structure.Post;
+import topicmodel.ExamineMachine;
 
 /**
  * Servlet implementation class PostingServerlet
@@ -20,10 +21,22 @@ public class PostingServerlet extends HttpServlet {
     /**
      * Default constructor. 
      */
+	
+	private ExamineMachine e;
+	
     public PostingServerlet() {
         // TODO Auto-generated constructor stub
     }
-
+    
+    public void init() throws ServletException {
+    	  e = new ExamineMachine();
+    	  
+    	  //e.start();
+    	}
+    public void destroy() {
+        e.setStop(true);
+    	
+      }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -44,6 +57,7 @@ public class PostingServerlet extends HttpServlet {
 		}
 		p.initValue(paras);
 		p.saveValue();
+		ExamineMachine.addCount();
 		response.getWriter().write(p.getResponsePara());
 	}
 

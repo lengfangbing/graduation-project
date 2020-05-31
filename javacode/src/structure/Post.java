@@ -18,6 +18,9 @@ public class Post implements Structure{
 	private int state;
 	
 	private static String tablename = "";
+	public static String getPostTableName() {
+		return tablename;
+	}
 	
 	private ArrayList<Reply> replys;
 	public Post() {
@@ -161,5 +164,13 @@ public class Post implements Structure{
 		return re;
 	}
 
-	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Post) {
+			Post p = (Post)obj;
+			if(p.postId == this.postId)
+				return true;
+		}
+		return false;
+	}
 }

@@ -2,11 +2,12 @@ package util;
 
 
 
-import java.util.ArrayList;
+import java.util.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class MysqlHelper {
@@ -38,7 +39,7 @@ public class MysqlHelper {
 		try {
 			conn = DriverManager.getConnection(Url, UserAccount, PassWord);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			System.out.println("Á´½ÓÊ§°Ü");
 			e.printStackTrace();
 		}
@@ -79,6 +80,49 @@ public class MysqlHelper {
 		}
 		System.out.println(sql);
 		return re>0 ? true:false;
+	}
+	public static ArrayList<HashMap<String,String>> getValueFromTable(String tableName,
+			String key,String keyValue){
+		String sql = "select * from "+tableName+" where "+key+"= '"+keyValue+"'";
+		return selectValue(sql);
+	}
+	public static ArrayList<HashMap<String,String>> getValueFromTable(String tableName){
+		String sql = "select * from "+tableName;
+		return selectValue(sql);
+	}
+	private static ArrayList<HashMap<String,String>> selectValue(String sql){
+		
+		System.out.println(sql);
+		PreparedStatement prep = null;
+		ResultSet re = null;
+		ArrayList<HashMap<String,String>> l = new ArrayList<>();
+		getConn();
+		try {
+			prep = conn.prepareStatement(sql);
+			re = prep.executeQuery();
+			ResultSetMetaData d = re.getMetaData();
+			while(re.next()) {
+				HashMap<String,String> map = new HashMap<>();
+				for(int i=0;i<=d.getColumnCount();i++) {
+					String name = d.getColumnName(i);
+					map.put(name, re.getString(i));
+				}
+				l.add(map);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(re !=null)
+					re.close();
+				if(prep != null)
+					prep.close();
+				close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return l;
 	}
 	
 	public static boolean updateValue(String tablename,

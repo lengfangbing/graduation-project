@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import structure.Examine;
+import topicmodel.LearningMachine;
+import topicmodel.TopicDatabase;
+import topicmodel.TopicTrainer;
 
 /**
  * Servlet implementation class ExamineServerlet
@@ -16,6 +19,9 @@ import structure.Examine;
 public class ExamineServerlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private LearningMachine lm= new LearningMachine();
+//	private TopicDatabase td = new TopicDatabase();
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -23,7 +29,20 @@ public class ExamineServerlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
+    public void init() throws ServletException{
+    	try {
+			Class.forName("topicmodel.TopicDatabase");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+    }
+    public void destroy() {
+    	lm.start();
+    	TopicDatabase.save();
+    	TopicTrainer.save();
+    }
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
