@@ -15,6 +15,7 @@ import topicmodel.TopicTrainer;
 /**
  * Servlet implementation class ExamineServerlet
  */
+@Deprecated
 @WebServlet("/check")
 public class ExamineServerlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

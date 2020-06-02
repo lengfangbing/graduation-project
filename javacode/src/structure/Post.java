@@ -2,7 +2,7 @@ package structure;
 
 import java.util.*;
 
-import util.MysqlHelper;
+//import util.MysqlHelper;
 
 /*
  * 帖子结构体
@@ -10,33 +10,42 @@ import util.MysqlHelper;
 public class Post implements Structure{
 	private int userId;
 	private int postId;
+	private String author;
 	private String postTitle;
 	private String postContent;
 	private String postHTML;
 	private String time;
-	private boolean success;
-	private int state;
+//	private boolean success;
+//	private int code = 1;
+	private int state = 0;
 	
-	private static String tablename = "";
+	private static String tablename = "invitation";
 	public static String getPostTableName() {
 		return tablename;
 	}
 	
+	@Deprecated
 	private ArrayList<Reply> replys;
 	public Post() {
 		state = 0;
 		replys = new ArrayList<>();
 	}
 	
-	public void initValue(int userId,int postId,String postTitle,
-						  String postContent,String postHTML,String time) {
-		this.userId = userId;
+	public void initValue(int postId,String postTitle,
+						  String postContent,int status) {
+//		this.userId = userId;
 		this.postId = postId;
 		this.postContent = postContent;
-		this.postHTML = postHTML;
+//		this.author = author;
 		this.postTitle = postTitle;
-		this.time = time;
+		this.state = status;
+//		this.time = time;
 	}
+	public void initValue(String[] paras) {
+		initValue(
+				Integer.valueOf(paras[0]),paras[1],paras[2],Integer.valueOf(paras[3]));
+	}
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -111,28 +120,30 @@ public class Post implements Structure{
 		ArrayList<String> collist = new ArrayList<>();
 		ArrayList<String> valuelist = new ArrayList<>();
 		collist.add("userId");
-		collist.add("postId");
-		collist.add("postTitle");
-		collist.add("postContent");
-		collist.add("postHTML");
+		collist.add("invitationId");
+//		collist.add("postTitle");
+//		collist.add("postContent");
+//		collist.add("postHTML");
 		collist.add("time");
-		
+		collist.add("author");
 		valuelist.add(String.valueOf(userId));
 		valuelist.add(String.valueOf(postId));
-		valuelist.add(postTitle);
-		valuelist.add(postContent);
-		valuelist.add(postHTML);
+//		valuelist.add(postTitle);
+//		valuelist.add(postContent);
+//		valuelist.add(postHTML);
 		valuelist.add(time);
+		valuelist.add(author);
 		
-		success = MysqlHelper.addValueToTable(tablename, collist, valuelist);
+//		success = MysqlHelper.addValueToTable(tablename, collist, valuelist);
 	}
 
 	
-	
+	@Deprecated
 	public String[] getReplyRequestPara() {
 		return new Reply().getRequestPara();
 	}
 	
+	@Deprecated
 	public String addReply(String userId,String replyContent) {
 		Reply p = new Reply();
 		p.setUserId(Integer.valueOf(userId));
@@ -142,25 +153,19 @@ public class Post implements Structure{
 		return p.getResponsePara();
 	}
 	
-	public void initValue(String[] paras) {
-		initValue(
-				Integer.valueOf(paras[0]),Integer.valueOf(paras[1]),paras[2],paras[3],paras[4],paras[5]);
-	}
-	
 	@Override
 	public String getResponsePara() {
-		String re = "{\nuserId:"+userId+
-				",\npostId:"+postId+
-				",\nsuccess:"+success+
-				",\nstate:"+state+
-				"}";
+		String re = "{\ninvatationId:"+postId+
+//				",\nsuccess:"+success+
+				",\nstatus:"+state+
+				"\n}";
 		
 		return re;
 	}
 	@Override
 	public String[] getRequestPara() {
 		// TODO Auto-generated method stub
-		String[] re = {"userId","postId","postTitle","postContent","postHTML","time"};
+		String[] re = {"invitationId","title","content","status"};
 		return re;
 	}
 

@@ -12,6 +12,8 @@ import structure.Reply;
 /**
  * Servlet implementation class ReplyServerlet
  */
+
+@Deprecated
 @WebServlet("/reply")
 public class ReplyServerlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

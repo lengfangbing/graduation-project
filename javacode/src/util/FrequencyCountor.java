@@ -5,6 +5,29 @@ import java.util.*;
 public class FrequencyCountor {
 	private static ArrayList<String> wordbook = new ArrayList<>();
 	private static ArrayList<String> contentbook = new ArrayList<>();
+	private static final String WORDBOOKFILENAME = "topic\\word.book";
+	private static final String CONTENTBOOKFILENAME = "topic\\content.book";
+	
+	static {
+		init();
+	}
+	private static void init(){
+		 initwordbook();
+		 initcontentbook();
+	}
+	private static void initwordbook() {
+		wordbook = new ArrayList<>();
+		String content = FileHelper.binaryFileReader(WORDBOOKFILENAME);
+		String[] ss = content.split(",");
+		for(int i=0;i<ss.length;i++) {
+			wordbook.add(ss[i]);
+		}
+	}
+	private static void initcontentbook() {
+		contentbook = new ArrayList<>();
+		String content = FileHelper.binaryFileReader(CONTENTBOOKFILENAME);
+		contentbook.add(content);
+	}
 	
 	public static ArrayList<String> getWordList(String content){
 		ArrayList<String> re = new ArrayList<>();
@@ -81,6 +104,24 @@ public class FrequencyCountor {
 		}
 	}
 	public static void save() {
-		
+		savewordbook();
+		savecontentbook();
+	}
+	private static void savewordbook() {
+		int i = 0;
+		String content = "";
+		for(String x:wordbook) {
+			content+=x;
+			content += (i<wordbook.size()-1) ? ",":"";
+			i++;
+		}
+		FileHelper.fileCreator(WORDBOOKFILENAME, content);
+	}
+	private static void savecontentbook() {
+		String content = "";
+		for(String x:contentbook) {
+			content+=x;
+		}
+		FileHelper.fileCreator(CONTENTBOOKFILENAME, content);
 	}
 }

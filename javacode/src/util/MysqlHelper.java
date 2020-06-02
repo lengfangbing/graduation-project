@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class MysqlHelper {
 	private  static String UserAccount = "root";
 	private  static String PassWord = "123456";
-	private  static String Url = "jdbc:mysql://localhost:3306/book?"
+	private  static String Url = "jdbc:mysql://localhost:3306/graduation?"
 								 + "characterEncoding=utf-8&serverTimezone=GMT%2B8";
 	
 	private static Connection conn = null;

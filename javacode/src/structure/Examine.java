@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 import util.MysqlHelper;
 
+@Deprecated
 public class Examine implements Structure{
 	private int postId;
 	private int state;
 	private boolean success;
 	
-	private static String tablename;
+	private static String tablename = "invatation";
 	
 	public void initValue(int postId,int state) {
 		this.postId = postId;

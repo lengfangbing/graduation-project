@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import structure.Post;
-import topicmodel.ExamineMachine;
+//import topicmodel.ExamineMachine;
+import topicmodel.Topic;
+import topicmodel.TopicDatabase;
+import topicmodel.TopicTrainer;
+import util.FrequencyCountor;
 
 /**
  * Servlet implementation class PostingServerlet
@@ -22,20 +26,29 @@ public class PostingServerlet extends HttpServlet {
      * Default constructor. 
      */
 	
-	private ExamineMachine e;
+//	private ExamineMachine e;
 	
     public PostingServerlet() {
         // TODO Auto-generated constructor stub
     }
     
     public void init() throws ServletException {
-    	  e = new ExamineMachine();
-    	  
+//    	  e = new ExamineMachine();
+    	  try {
+			Class.forName("util.FrequencyCountor");
+			Class.forName("topicmodel.TopicDatabase");
+			Class.forName("topicmodel.TopicTrainer");
+		} catch (ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		}
     	  //e.start();
     	}
     public void destroy() {
-        e.setStop(true);
-    	
+//        e.setStop(true);
+    	FrequencyCountor.save();
+    	TopicDatabase.save();
+    	TopicTrainer.save();
       }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -56,8 +69,14 @@ public class PostingServerlet extends HttpServlet {
 			paras[i] = request.getParameter(ps[i]);
 		}
 		p.initValue(paras);
-		p.saveValue();
-		ExamineMachine.addCount();
+//		p.saveValue();
+		if(p.getState() == 0) {
+			int status = Topic.autoExamine(p);
+			p.setState(status);
+		}else {
+			TopicTrainer.learn(p);
+		}
+//		ExamineMachine.addCount();
 		response.getWriter().write(p.getResponsePara());
 	}
 

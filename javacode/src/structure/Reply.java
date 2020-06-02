@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import util.MysqlHelper;
 
+@Deprecated
 public class Reply implements Structure{
 	
 	private int postId;
@@ -11,7 +12,7 @@ public class Reply implements Structure{
 	private String replyContent;
 	private boolean success;
 	
-	private static String tablename = "";
+	private static String tablename = "commet";
 	
 	public void initValue(int postId,int userId,String replyContent) {
 		this.postId = postId;
