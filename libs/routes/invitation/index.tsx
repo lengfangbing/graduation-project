@@ -72,7 +72,8 @@ class Invitation extends Component<Props, State>{
 		const { userId, userName } = this.props.userStore;
 		const { invitationId, authorId } = config;
 		if(!userId){
-			return alert('请先登录');
+			// @ts-ignore
+			return window.showToast({title: '请先登录'});
 		}
 		postCommet({
 			user: userName,

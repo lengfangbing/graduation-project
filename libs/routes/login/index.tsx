@@ -87,7 +87,7 @@ class Login extends Component<Props, State> {
       isRegister: true
     })
     if (registerPassword !== registerConfirm) {
-      alert('两次密码不一致');
+      window.Toast.show({ttile: '两次密码不一致'});
       this.setState({
         isRegister: false
       })

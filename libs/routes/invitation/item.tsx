@@ -33,7 +33,7 @@ class Item extends Component<Props, State>{
 		const { config, onClick } = this.props;
 		const { commet } = this.state;
 		if(commet.trim() === ''){
-			return alert('请输入回复内容');
+			return window.showToast({title: '请输入回复内容'});
 		};
 		onClick(commet);
 	}

@@ -15,7 +15,7 @@ export function fetchAPI(url, { method = 'GET', data }){
 export function notLogin(userId = '', params = {}){
 	const { protol = 'http', host = '127.0.0.1', port = '5000', path = '/login' } = params;
 	if(!userId){
-		alert('请先登录');
+		showToast({title: '请先登录'});
 		history.replace('/login')
 		return true;
 	}

@@ -35,7 +35,7 @@ class UserStore{
 			data: params
 		})
       .then(res => {
-        alert(res.message)
+        showToast({title: res.message})
         if(res.code){
           const { data } = res;
           const { userName, userId, password, userAuth } = data;
@@ -47,7 +47,7 @@ class UserStore{
         return res;
       })
       .catch((e) => {
-        alert('网络错误')
+        showToast({title: '网络错误'})
         Promise.reject();
       });
   }
@@ -60,7 +60,7 @@ class UserStore{
 			data: params
 		})
       .then(res => {
-        alert(res.message)
+        showToast({title: res.message})
         if(res.code){
           const { data } = res;
           const { userName, userId, password, userAuth } = data;
@@ -73,7 +73,7 @@ class UserStore{
       })
       .catch((e) => {
 				console.log(e)
-        alert('网络错误')
+        showToast({title: '网络错误'})
         Promise.reject()
       })
   }
@@ -86,7 +86,7 @@ class UserStore{
       data: params
     })
       .then(res => {
-        alert(res.message)
+        showToast({title: res.message})
         if(res.code){
           const { data } = res;
           const { name, password } = data;
@@ -96,7 +96,7 @@ class UserStore{
         return res;
       })
       .catch(() => {
-        alert('网络错误')
+        showToast({title: '网络错误'})
         Promise.reject()
       })
   }

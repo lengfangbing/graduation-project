@@ -1,13 +1,24 @@
 .header{
 	width: 100%;
-	height: 56px;
+	height: 100px;
 	position: fixed;
 	top: 0;
 	display: flex;
 	align-items: center;
 	box-sizing: border-box;
-	padding: 0 40px;
-	background-color: rgba(82, 169, 211, 0.5);
+	padding: 0 40px 0 150px;
+	background: #ffffff;
+	filter: opacity(70%);
+	.image{
+		width: 100px;
+		height: 100px;
+		object-fit: cover;
+		object-position: center;
+		position: absolute;
+		top: 0;
+		left: 25px;
+		background: transparent;
+	}
 	&-content{
 		box-sizing: border-box;
 		padding: 0 20px;
@@ -15,6 +26,7 @@
 		width: 100%;
 		align-items: center;
 		justify-content: space-between;
+		filter: opacity(1);
 		.title{
 			margin: 0;
 		}

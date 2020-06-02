@@ -63,7 +63,7 @@ class Publish extends Component<Props, State>{
 		const { postPublish } = this.props.publishStore;
 		const { title, html } = this.state;
 		if(title.trim() === '' || html.trim() === ''){
-			return alert('请不要输入空标题/文本');
+			return window.showToast({title: '请不要输入空标题/文本'});
 		}
 		postPublish({
 			title,
@@ -71,7 +71,7 @@ class Publish extends Component<Props, State>{
 			author: userName,
 			authorId: userId
 		}).then(res => {
-			
+
 		})
 	}
 

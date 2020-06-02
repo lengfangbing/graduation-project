@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import { Link, BrowserRouter as Router, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import './index.less';
 
@@ -48,6 +48,7 @@ class Header extends Component<Props>{
 		const { userStore } = this.props;
 		return (
 			<div className='header'>
+				<img className='image' src="../../../assets/bird.png" alt="和平鸽"/>
 				<div className="header-content">
 					<h1 className='title'>毕业设计论坛demo</h1>
 					{
