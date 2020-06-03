@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const resolve = path.resolve;
 
 module.exports = {
-  mode: "development",
+  mode: "production",
   entry: {
     main: resolve(__dirname, "./app.jsx"),
   },
@@ -26,7 +26,15 @@ module.exports = {
       },
       {
         test: /\.css/,
-        loader: ["style-loader", "css-loader"],
+        use: [
+					{ loader: 'style-loader' },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          }
+				],
         exclude: /node_modules/,
       },
       {
@@ -34,6 +42,11 @@ module.exports = {
         loader: ["style-loader", "css-loader", "less-loader"],
         exclude: /node_modules/,
       },
+      {
+        test: /\.(png|jpg)/,
+        loader: ["url-loader"],
+        exclude: /node_modules/
+      }
     ],
   },
   resolve: {

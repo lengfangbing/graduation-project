@@ -4,7 +4,7 @@ interface ButtonProps {
     disabled?: boolean | string
     content?: any
     onClick?: MouseEventHandler<HTMLButtonElement>
-    loading?: boolean
+    loading?: boolean | number
     children?: any
     //点击间隔
     timer?: number | string

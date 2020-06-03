@@ -5,24 +5,31 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2 start server/app.js -i 4",
+    "build": "webpack",
+    "start": "npm run build && npm run start:watch",
     "dev": "webpack-dev-server --config webpack.dev.config.js",
-    "stop": "pm2 stop server/app.js"
+    "stop": "pm2 stop server/app.js",
+    "restart": "yarn stop && yarn start",
+    "start:watch": "pm2 start server/app.js"
   },
   "author": "lengfangbing",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
+    "classnames": "^2.2.6",
     "core-js": "^3.5.0",
     "koa": "^2.11.0",
     "koa-body": "^4.1.1",
     "koa-router": "^8.0.8",
     "koa-static": "^5.0.0",
     "koa2-cors": "^2.0.6",
+    "leng-react-design": "1.0.4",
     "node-mongoose": "^1.2.3",
     "node-verify-token": "^1.0.2",
     "pm2": "^4.2.3",
+    "socket.io": "^2.3.0",
     "superagent": "^5.2.2",
+    "url-loader": "^4.1.0",
     "wangeditor": "^3.1.1"
   },
   "devDependencies": {

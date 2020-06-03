@@ -5,23 +5,30 @@ const useRouter = require('./routes/index');
 const cors = require("koa2-cors");
 const static = require('koa-static');
 const body = require('koa-body');
+const server = require('http').createServer(app.callback());
+const socket = require('./socket');
+socket(server);
+const port = 3000;
 app.use(
   cors({
     origin: function(ctx) {
-      return "http://localhost:8080";
+      return '*';
     },
-    exposeHeaders: ["WWW-Authenticate", "Server-Authorization"],
     maxAge: 5,
     credentials: true,
     allowMethods: ["GET", "POST", "DELETE", "PUT", "OPTIONS"],
-    allowHeaders: ["Content-Type", "Authorization", "Accept"]
+    allowHeaders: ["Content-Type", "Authorization"]
   })
 );
 app.use(static(path.join(__dirname, '../')));
 app.use(body({
-  multipart: true
+  multipart: true,
+  jsonLimit: 10000000,
+  formidable: {
+    maxFieldsSize: 1000 * 1024 * 1024
+  }
 }));
 useRouter(app);
-app.listen(3000, () => {
+server.listen(port, () => {
   console.log('server is running at 3000');
 })
