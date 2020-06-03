@@ -65,7 +65,7 @@ public class FrequencyCountor {
 				re.put(x, new Integer(n));
 		}
 		
-		dividework(content);
+		new divider(content).start();
 		contentbook.add(content);
 		
 		return re;
@@ -83,7 +83,18 @@ public class FrequencyCountor {
 		}
 		return re;
 	}
-	private static void dividework(String content) {
+	
+	private static class divider extends Thread{
+		String content;
+		divider(String content){
+			this.content = content;
+		}
+		@Override
+		public void run() {
+			divideword(content);
+		}
+	}
+	private static void divideword(String content) {
 		for(String x:contentbook) {
 			divide0(x,content);
 		}
