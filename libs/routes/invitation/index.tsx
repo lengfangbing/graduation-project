@@ -60,6 +60,7 @@ class Invitation extends Component<Props, State>{
             commets
           }
         }
+        return val;
       });
       this.setState({
         list: _list

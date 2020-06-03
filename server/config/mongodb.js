@@ -26,6 +26,14 @@ module.exports = new Mongo({
 		auth: {
 			type: Number,
 			default: 0
+		},
+		utcTime: {
+			type: Number,
+			default: new Date().getTime()
+		},
+		time: {
+    	type: String,
+			default: `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDay()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
 		}
 	},
 	invitation: {
@@ -54,6 +62,14 @@ module.exports = new Mongo({
 			type: Number,
 			required: true,
 			default: 0
+		},
+		utcTime: {
+			type: Number,
+			default: new Date().getTime()
+		},
+		time: {
+			type: String,
+			default: `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDay()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
 		}
 	},
 	commet: {
@@ -76,6 +92,14 @@ module.exports = new Mongo({
 		user: {
 			type: String,
 			required: true
+		},
+		utcTime: {
+			type: Number,
+			default: new Date().getTime()
+		},
+		time: {
+			type: String,
+			default: `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDay()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
 		}
 	}
 });

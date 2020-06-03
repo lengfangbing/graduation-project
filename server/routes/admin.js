@@ -55,4 +55,7 @@ module.exports = (router, mongo) => {
       }
     }
 	});
+	router.post('/autoCheck', async ctx => {
+		// java自动审核完成后返回的json数据
+	});
 }

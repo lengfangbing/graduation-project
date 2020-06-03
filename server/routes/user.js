@@ -1,3 +1,10 @@
+function getUtcTime(){
+  return Date.now()
+}
+function getTime(){
+  const date = new Date();
+  return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDay()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+}
 module.exports = (router, mongo) => {
   router.post('/register', async ctx => {
     const { registerName, registerPassword } = ctx.request.body;
@@ -6,7 +13,9 @@ module.exports = (router, mongo) => {
       name: registerName,
       password: registerPassword,
       auth: 0,
-      userId: id
+      userId: id,
+      utcTime: getUtcTime(),
+      time: getTime()
     });
     if (res.status) {
       ctx.body = {
