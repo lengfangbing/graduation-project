@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import structure.Post;
+import topicmodel.Learner;
 //import topicmodel.ExamineMachine;
 import topicmodel.Topic;
 import topicmodel.TopicDatabase;
@@ -74,7 +75,7 @@ public class PostingServerlet extends HttpServlet {
 			int status = Topic.autoExamine(p);
 			p.setState(status);
 		}else {
-			TopicTrainer.learn(p);
+			new Learner(p).start();
 		}
 //		ExamineMachine.addCount();
 		response.getWriter().write(p.getResponsePara());

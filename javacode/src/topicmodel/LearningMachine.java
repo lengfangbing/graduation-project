@@ -6,6 +6,7 @@ import java.util.HashMap;
 import structure.Post;
 import util.MysqlHelper;
 
+@Deprecated
 public class LearningMachine extends Thread{
 	@Override
 	public void run() {
