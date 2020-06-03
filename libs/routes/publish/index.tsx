@@ -36,7 +36,6 @@ class Publish extends Component<Props, State>{
 		const editor = new E(elem);
 		// 使用 onchange 函数监听内容的变化，并实时更新到 state 中
 		editor.customConfig.onchange = html => {
-			console.log(html);
 			this.setState({
 				html
 			})

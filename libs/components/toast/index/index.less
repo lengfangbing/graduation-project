@@ -1,0 +1,68 @@
+@keyframes lifeCircle {
+  from {
+    transform: translate3d(-50%, -50%, 0) scale(0);
+    opacity  : 1;
+  }
+
+  9% {
+    transform: translate3d(-50%, -50%, 0) scale(1);
+    opacity  : 1;
+  }
+
+  90% {
+    transform: translate3d(-50%, -50%, 0) scale(1);
+    opacity  : 1;
+  }
+
+  to {
+    transform: translate3d(-50%, -50%, 0) scale(1);
+    opacity  : 0;
+  }
+}
+
+.toast {
+  &-container {
+    position  : fixed;
+    top       : 50%;
+    left      : 50%;
+    box-sizing: border-box;
+    width     : fit-content;
+    max-width : 60%;
+    padding   : 14px 20px;
+    background-color: rgba(0, 0, 0, .8);
+    border-radius: 8px;
+    transform : translate3d(-50%, -50%, 0);
+    opacity   : 0;
+    animation : lifeCircle 2.7s linear 0s 1;
+    &.icon{
+      max-width: 124px;
+      max-height: 94px;
+      padding: 10px 20px 16px;
+    }
+  }
+
+  &-image{
+    width: 48px;
+    height: 48px;
+    margin: 0 50%;
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  &-wrapper {
+    display           : -webkit-box;
+    width             : 100%;
+    margin: 0;
+    overflow  : hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    color: #fff;
+    font-weight: 400;
+    font-size: 14px;
+    word-break: break-all;
+
+    &.icon {
+      max-width: 85px;
+      -webkit-line-clamp: 1;
+    }
+  }
+}
