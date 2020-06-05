@@ -1,15 +1,13 @@
 const path = require('path');
 const Koa = require("koa");
 const app = new Koa();
-const Event = require('events').EventEmitter;
 const useRouter = require('./routes/index');
 const cors = require("koa2-cors");
 const static = require('koa-static');
 const body = require('koa-body');
 const server = require('http').createServer(app.callback());
 const socket = require('./socket');
-const emitter = new Event();
-socket(server, emitter);
+socket(server);
 const port = 3000;
 app.use(
   cors({
@@ -30,7 +28,7 @@ app.use(body({
     maxFieldsSize: 1000 * 1024 * 1024
   }
 }));
-useRouter(app, emitter);
+useRouter(app);
 server.listen(port, () => {
   console.log('server is running at 3000');
 })

@@ -93,7 +93,8 @@ module.exports = (router, mongo) => {
           invitationId: String(id),
           status: 0,
           title,
-          content
+          content,
+          authorId
         })
         .end();
       ctx.body = {

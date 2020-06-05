@@ -57,14 +57,16 @@ module.exports = (router, mongo, event) => {
 	});
 	router.post('/autoCheck', async ctx => {
 		// java自动审核完成后返回的json数据
-    const { invitationId, status } = ctx.request.body;
+    const { invitationId, status, authorId } = ctx.request.body;
     const res = await mongo.updateOne('invitation', {
-      invitationId
+      invitationId: +invitationId
     }, {
-      status
+      status: +status
     });
     if (res.status) {
-			event.emit('checkStatus', status);
+      globalThis.socket.emit('auto', {status, invitationId, authorId});
+      globalThis.socket.emit('refresh');//给自己也发一份
+      globalThis.socket.broadcast.emit('refresh'); 
     }
 	});
 }

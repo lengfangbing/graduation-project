@@ -4,6 +4,8 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import E from 'wangeditor';
 import { notLogin } from '@/utils';
+import { createHashHistory, createBrowserHistory } from 'history';
+const history = createHashHistory();
 import './index.less';
 
 interface Props {
@@ -64,13 +66,17 @@ class Publish extends Component<Props, State>{
 		if(title.trim() === '' || html.trim() === ''){
 			return window.showToast({title: '请不要输入空标题/文本'});
 		}
+    this.setState({
+      title: '',
+      html: ''
+    });
 		postPublish({
 			title,
 			content: html,
 			author: userName,
 			authorId: userId
-		}).then(res => {
-
+		}).then(() => {
+      history.replace('/');
 		})
 	}
 

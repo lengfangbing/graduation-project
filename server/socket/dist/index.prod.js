@@ -1,0 +1,1 @@
+"use strict";module.exports=function(o){require("socket.io")(o).on("connection",function(e){e.emit("open"),console.log("connected"),e.on("disconnect",function(){console.log("disconnect")}),e.on("reply",function(o){e.broadcast.emit("receive",o),e.emit("receive",o)}),globalThis.socket=e})};

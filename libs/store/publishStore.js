@@ -15,11 +15,7 @@ class PublishStore {
 			data: params
 		})
       .then(res => {
-        showToast({title: res.message})
-        if(res.code){
-					const { data } = res;
-					console.log(data);
-        }
+        showToast({title: res.message});
         return res;
       })
       .catch((e) => {

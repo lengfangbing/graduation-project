@@ -66,6 +66,15 @@ class Invitation extends Component<Props, State>{
         list: _list
       });
     })
+    socket.on('auto', res => {
+      const { status, invitationId, authorId } = res;
+      if(status === '1' && authorId == this.props.userStore.userId){
+        window.showToast({title: '你的一条帖子通过审核'});
+      }
+    });
+    socket.on('refresh', () => {
+      this.getList()
+    })
   }
 
 	sendCommet(config, reply){
