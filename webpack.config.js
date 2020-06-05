@@ -40,6 +40,11 @@ module.exports = {
         loader: ["style-loader", "css-loader", "less-loader"],
         exclude: /node_modules/,
       },
+      {
+        test: /\.(png|jpg)/,
+        loader: ["url-loader"],
+        exclude: /node_modules/
+      }
     ],
   },
   resolve: {

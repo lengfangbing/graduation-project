@@ -90,8 +90,8 @@ module.exports = (router, mongo) => {
       request
         .post('http://127.0.0.1:8080/publish')
         .send({
-          invitationId: id,
-          status: '0',
+          invitationId: String(id),
+          status: 0,
           title,
           content
         })

@@ -7,7 +7,6 @@ import Invitation from './invitation/index';
 import Check from './check/index';
 import Login from './login/index';
 import UserCenter from './userCenter/index';
-import Message from './message/index';
 import { createHashHistory } from 'history';
 import './index.less';
 interface Props {
@@ -31,7 +30,6 @@ class Content extends Component<Props>{
 					<Route exact path={'/login'} component={Login} />
 					<Route exact path={'/checkMy'} component={CheckMy} />
 					<Route exact path={'/check'} component={Check} />
-					<Route exact path={'/message'} component={Message} />
 					<Route exact path={'/userCenter'} component={UserCenter} />
 				</Switch>
 			</div>

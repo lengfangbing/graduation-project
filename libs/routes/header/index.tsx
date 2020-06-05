@@ -33,13 +33,6 @@ class Header extends Component<Props>{
 							个人中心
 					</Link>
 				}
-				{
-					userStore.userAuth === 1
-						? null
-						: <Link to='/message'>
-							消息中心
-						</Link>
-				}
 			</div>
 		);
 	}

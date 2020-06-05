@@ -1,4 +1,4 @@
-module.exports = server => {
+module.exports = (server, event) => {
   const io = require('socket.io')(server);
 
   io.on('connection', socket => {
@@ -15,5 +15,8 @@ module.exports = server => {
 
       socket.emit('receive', data);
     });
+    event.on('checkStatus', (status) => {
+      console.log(status);
+    })
   });
 }; 
