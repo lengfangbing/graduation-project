@@ -2,11 +2,13 @@ package util;
 
 import java.util.*;
 
-public class FrequencyCountor {
+public class WordSpliter {
 	private static ArrayList<String> wordbook = new ArrayList<>();
 	private static ArrayList<String> contentbook = new ArrayList<>();
-	private static final String WORDBOOKFILENAME = "topic\\word.book";
-	private static final String CONTENTBOOKFILENAME = "topic\\content.book";
+	private static final String WORDBOOKFILENAME = "topic/word.book";
+	private static final String CONTENTBOOKFILENAME = "topic/content.book";
+	private static final String spliter = "#";
+	private static final String orgspliter = "#";
 	
 	static {
 		init();
@@ -18,7 +20,8 @@ public class FrequencyCountor {
 	private static void initwordbook() {
 		wordbook = new ArrayList<>();
 		String content = FileHelper.binaryFileReader(WORDBOOKFILENAME);
-		String[] ss = content.split(",");
+		if(content == "") return;
+		String[] ss = content.split(spliter);
 		for(int i=0;i<ss.length;i++) {
 			wordbook.add(ss[i]);
 		}
@@ -26,6 +29,7 @@ public class FrequencyCountor {
 	private static void initcontentbook() {
 		contentbook = new ArrayList<>();
 		String content = FileHelper.binaryFileReader(CONTENTBOOKFILENAME);
+		if(content == "") return;
 		contentbook.add(content);
 	}
 	
@@ -36,63 +40,28 @@ public class FrequencyCountor {
 		for(int i = 0;i<wordbook.size();i++)
 			copybook.add(wordbook.get(i));
 		
-		for(int i=0;i<content.length();i++) {
-			char c = content.charAt(i);
-			for(int j = 0;j<copybook.size();j++) {
-				String s = copybook.get(j);
-				if(c == s.charAt(0)) {
-					String sub = content.substring(i,i+s.length());
-					if(sub.equals(s)) {
-						re.add(s);
-						copybook.remove(s);
-						i = i+s.length();
-					}
-				}
-			}
+		for(String x:copybook) {
+			if(content.contains(x))
+				re.add(x);
 		}
 		return re;
 	}
 	
-	public static HashMap<String,Integer> countFrequency(String content) {
+	public static ArrayList<String> splitWord(String content) {
 		if(contentbook.size() == 0) {
 			contentbook.add(content);
 			return null;
 		}
-		HashMap<String,Integer> re = new HashMap<>();
+		ArrayList<String> re = new ArrayList<>();
 		for(String x:wordbook) {
-			int n = countor(x,content);
-			if(n != 0)
-				re.put(x, new Integer(n));
+			if(content.contains(x))
+				re.add(x);
 		}
 		
-		new divider(content).start();
+		divideword(content);
 		contentbook.add(content);
 		
 		return re;
-	}
-	private static int countor(String word,String content) {
-		int re = 0;
-		for(int i=0;i<content.length();i++) {
-			if(content.charAt(i) == word.charAt(i)) {
-				String s = content.substring(i,i+word.length());
-				if(s.equals(word)) {
-					re ++;
-					i += word.length();
-				}
-			}
-		}
-		return re;
-	}
-	
-	private static class divider extends Thread{
-		String content;
-		divider(String content){
-			this.content = content;
-		}
-		@Override
-		public void run() {
-			divideword(content);
-		}
 	}
 	private static void divideword(String content) {
 		for(String x:contentbook) {
@@ -101,19 +70,40 @@ public class FrequencyCountor {
 	}
 	private static void divide0(String s1,String s2) {
 		
-		for(int i=0,j=0;i<s1.length();i++) {
+		for(int i=0;i<s1.length();) {
 			String s = "";
-			for(;j<s2.length();j++){
-				if(s1.charAt(i) != s2.charAt(j))
-					break;
+			for(int j = 0;j<s2.length();j++){
+				if(s1.charAt(i) != s2.charAt(j)) {
+					if(s == "")
+						continue;
+					else
+						break;
+				}
 				s += s1.charAt(i);
 				i++;
 			}
-			if(s != "")
+			if(s != "") {
 				if(!wordbook.contains(s))
 					wordbook.add(s);
+				
+			}else
+				i++;
+				
 		}
 	}
+	
+//	private static class divider extends Thread{
+//		String content;
+//		divider(String content){
+//			this.content = content;
+//		}
+//		@Override
+//		public void run() {
+//			divideword(content);
+//			
+//		}
+//	}
+	
 	public static void save() {
 		savewordbook();
 		savecontentbook();
@@ -123,16 +113,16 @@ public class FrequencyCountor {
 		String content = "";
 		for(String x:wordbook) {
 			content+=x;
-			content += (i<wordbook.size()-1) ? ",":"";
+			content += (i<wordbook.size()-1) ? orgspliter:"";
 			i++;
 		}
-		FileHelper.fileCreator(WORDBOOKFILENAME, content);
+		FileHelper.fileCreator(WORDBOOKFILENAME, content,false);
 	}
 	private static void savecontentbook() {
 		String content = "";
 		for(String x:contentbook) {
 			content+=x;
 		}
-		FileHelper.fileCreator(CONTENTBOOKFILENAME, content);
+		FileHelper.fileCreator(CONTENTBOOKFILENAME, content,false);
 	}
 }

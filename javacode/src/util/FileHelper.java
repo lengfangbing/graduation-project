@@ -29,7 +29,11 @@ public class FileHelper {
 		byte[] l = new byte[20];
 		int index = 0;
 		try {
+			File f = new File(path);
+			if(!f.exists())
+				return "";
 			BufferedInputStream bis = new BufferedInputStream(new FileInputStream(path));
+			
 			byte b;
 			while((b = (byte) bis.read()) != -1) {
 				l[index] = b;

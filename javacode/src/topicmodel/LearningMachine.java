@@ -20,8 +20,8 @@ public class LearningMachine extends Thread{
 		for(HashMap<String,String> x:l) {
 			Post p = new Post();
 			String[] label = p.getRequestPara();
-			p.setUserId(Integer.valueOf(x.get(label[0])));
-			p.setPostId(Integer.valueOf(x.get(label[1])));
+			p.setUserId(x.get(label[0]));
+			p.setPostId(x.get(label[1]));
 			p.setPostTitle(x.get(label[2]));
 			p.setPostContent(x.get(label[3]));
 			p.setPostHTML(x.get(label[4]));

@@ -61,7 +61,7 @@ public class TopicUnit{
 
 	
 	public void inverseFormat(String s) {
-		String[] ss = s.split("\\n");
+		String[] ss = s.split("\n");
 		for(int i=0;i<ss.length;i++) {
 			String str = ss[i];
 			if(str.startsWith("topicName"))
@@ -73,13 +73,16 @@ public class TopicUnit{
 	}
 	private void settopicName(String s) {
 		String[] ss = s.split(":");
-		topicName = ss[1];
+		if(ss.length>1)
+			topicName = ss[1];
 	}
 	private void setkeyword(String s) {
 		String[] t = s.split(":");
-		String[] ss = t[1].split(",");
-		for(int i=0;i<ss.length;i++)
-			keyword.add(ss[i]);
+		if(t.length>1) {
+			String[] ss = t[1].split(",");
+			for(int i=0;i<ss.length;i++)
+				keyword.add(ss[i]);
+		}
 	}
 
 	

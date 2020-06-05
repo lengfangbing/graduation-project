@@ -15,7 +15,7 @@ import topicmodel.Learner;
 import topicmodel.Topic;
 import topicmodel.TopicDatabase;
 import topicmodel.TopicTrainer;
-import util.FrequencyCountor;
+import util.WordSpliter;
 
 /**
  * Servlet implementation class PostingServerlet
@@ -47,9 +47,10 @@ public class PostingServerlet extends HttpServlet {
     	}
     public void destroy() {
 //        e.setStop(true);
-    	FrequencyCountor.save();
+    	WordSpliter.save();
     	TopicDatabase.save();
     	TopicTrainer.save();
+    	Topic.stop();
       }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -75,6 +76,7 @@ public class PostingServerlet extends HttpServlet {
 			int status = Topic.autoExamine(p);
 			p.setState(status);
 		}else {
+			Learner.addCount();
 			new Learner(p).start();
 		}
 //		ExamineMachine.addCount();

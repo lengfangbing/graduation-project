@@ -10,8 +10,10 @@ public class TopicDatabase {
 	private static ArrayList<String> bankeylist = new ArrayList<>();
 	private static final double BANSIZERATIO = 0.9; 
 	
-	private static final String TOPICFILENAME = "C:\\Users\\win\\Desktop\\dream\\topic\\topic.tu";//.topicunit;
-	private static final String BANTOPICFILENAME = "C:\\Users\\win\\Desktop\\dream\\topic\\bankeylist.tu";
+	private static final String TOPICFILENAME = "topic/topic.tu";//.topicunit;
+	private static final String BANTOPICFILENAME = "topic/bankeylist.tu";
+	private static final String spliter = "#";
+	private static final String orgspliter = "#";
 	
 	private static fixer f = new fixer();
 	public static void save() {
@@ -27,7 +29,7 @@ public class TopicDatabase {
 	}
 	private static void inittopiclist() {
 		String content = FileHelper.binaryFileReader(TOPICFILENAME);
-		String[] ss = content.split("}\\n");
+		String[] ss = content.split("}\n");
 		for(int i=0;i<ss.length;i++) {
 			TopicUnit t = new TopicUnit("");
 			t.inverseFormat(ss[i]);
@@ -36,7 +38,7 @@ public class TopicDatabase {
 	}
 	private static void initbankeylist() {
 		String content = FileHelper.binaryFileReader(BANTOPICFILENAME);
-		String[] ss = content.split(",");
+		String[] ss = content.split(spliter);
 		for(int i=0;i<ss.length;i++) {
 			bankeylist.add(ss[i]);
 		}
@@ -55,11 +57,13 @@ public class TopicDatabase {
 	}
 	
 	public static void addTopic(TopicUnit t) {
+		if(t.getTopicName() == "") return;
 		if(topiclist.contains(t)) {
 			TopicUnit t2 = topiclist.get(topiclist.indexOf(t));
 			t = mergetopic(t,t2);
 		}
-		topiclist.add(t);
+		if(!topiclist.contains(t))
+			topiclist.add(t);
 		addkeyword(t);
 	}
 	private static TopicUnit mergetopic(TopicUnit t1,TopicUnit t2) {
@@ -71,7 +75,7 @@ public class TopicDatabase {
 		for(String x:l) {
 			keyword k = new keyword(x);
 			k.t = t;
-			if(!keywordlist.contains(k))
+			if(k.keyword != "" && !keywordlist.contains(k))
 				keywordlist.add(k);
 		}
 		keyword k = new keyword(t.getTopicName());
@@ -110,7 +114,7 @@ public class TopicDatabase {
 		Set<String> set = map.keySet();
 		for(String x:set) {
 			int i = map.get(x);
-			if(i > n)
+			if(x != "" && i > n)
 				bankeylist.add(x);
 		}
 	}
@@ -145,7 +149,7 @@ public class TopicDatabase {
 		
 		void fixup() {
 			String log = Topic.getLog();
-			String[] row = log.split("\\n");
+			String[] row = log.split("\n");
 			int r = row.length;
 			ArrayList<fixunit> l = new ArrayList<>();
 			for(int i=0;i<r;i++) {
@@ -217,10 +221,10 @@ public class TopicDatabase {
 			int i = 0;
 			for(String x:bankeylist) {
 				content += x;
-				content += i<bankeylist.size()-1 ? ",":"";
+				content += i<bankeylist.size()-1 ? orgspliter:"";
 				i++;
 			}
-			FileHelper.fileCreator(BANTOPICFILENAME, content);
+			FileHelper.fileCreator(BANTOPICFILENAME, content,false);
 		}
 	}
 }

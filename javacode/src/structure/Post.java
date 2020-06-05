@@ -8,8 +8,8 @@ import java.util.*;
  * 帖子结构体
  * */
 public class Post implements Structure{
-	private int userId;
-	private int postId;
+	private String userId;
+	private String postId;
 	private String author;
 	private String postTitle;
 	private String postContent;
@@ -31,7 +31,7 @@ public class Post implements Structure{
 		replys = new ArrayList<>();
 	}
 	
-	public void initValue(int postId,String postTitle,
+	public void initValue(String postId,String postTitle,
 						  String postContent,int status) {
 //		this.userId = userId;
 		this.postId = postId;
@@ -43,25 +43,25 @@ public class Post implements Structure{
 	}
 	public void initValue(String[] paras) {
 		initValue(
-				Integer.valueOf(paras[0]),paras[1],paras[2],Integer.valueOf(paras[3]));
+				paras[0],paras[1],paras[2],Integer.valueOf(paras[3]));
 	}
 	
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
 
-	public int getPostId() {
+	public String getPostId() {
 		return postId;
 	}
 
 
-	public void setPostId(int postId) {
+	public void setPostId(String postId) {
 		this.postId = postId;
 	}
 
