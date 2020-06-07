@@ -8,6 +8,10 @@ public class TopicDatabase {
 	private static ArrayList<TopicUnit> topiclist = new ArrayList<>();
 	private static ArrayList<keyword> keywordlist = new ArrayList<>();
 	private static ArrayList<String> bankeylist = new ArrayList<>();
+	public static ArrayList<String> getBanList(){
+		return bankeylist;
+	}
+	
 	private static final double BANSIZERATIO = 0.9; 
 	
 	private static final String TOPICFILENAME = "topic/topic.tu";//.topicunit;
@@ -58,6 +62,8 @@ public class TopicDatabase {
 	
 	public static void addTopic(TopicUnit t) {
 		if(t.getTopicName() == "") return;
+		if(bankeylist.contains(t.getTopicName())) return;
+		
 		if(topiclist.contains(t)) {
 			TopicUnit t2 = topiclist.get(topiclist.indexOf(t));
 			t = mergetopic(t,t2);
@@ -75,12 +81,12 @@ public class TopicDatabase {
 		for(String x:l) {
 			keyword k = new keyword(x);
 			k.t = t;
-			if(k.keyword != "" && !keywordlist.contains(k))
+			if(!bankeylist.contains(x) && k.keyword != "" && !keywordlist.contains(k))
 				keywordlist.add(k);
 		}
 		keyword k = new keyword(t.getTopicName());
 		k.t = t;
-		if(!keywordlist.contains(k))
+		if(!keywordlist.contains(k))//已检查
 			keywordlist.add(k);
 	}
 	private static void updatekeywordlist() {
@@ -89,9 +95,12 @@ public class TopicDatabase {
 			ArrayList<String> l2 = x.getKeywordList();
 			ArrayList<keyword> sub = new ArrayList<>();
 			for(String s:l2) {
-				keyword k = new keyword(s);
-				k.t = x;
-				sub.add(k);
+				if(!bankeylist.contains(s)) {
+					keyword k = new keyword(s);
+					k.t = x;
+					sub.add(k);
+				}
+				
 			}
 			l.addAll(sub);
 		}
@@ -100,6 +109,7 @@ public class TopicDatabase {
 	
 	private static void ban() {
 		int n = topiclist.size();
+		if(n <= 10) return;
 		n = (int)(n*BANSIZERATIO);
 		HashMap<String,Integer> map = new HashMap<>();
 		for(keyword x:keywordlist) {
@@ -114,8 +124,26 @@ public class TopicDatabase {
 		Set<String> set = map.keySet();
 		for(String x:set) {
 			int i = map.get(x);
-			if(x != "" && i > n)
+			if(x != "" && i > n) {
 				bankeylist.add(x);
+				clean(x);
+			}
+				
+		}
+	}
+	private static void clean(String s) {//清理遗留的禁用词
+		keyword k = new keyword(s);
+		while(keywordlist.remove(k));
+		TopicUnit u = new TopicUnit(s);
+		int j = topiclist.indexOf(u);
+		if(j != -1) {
+			u = topiclist.get(j);
+			ArrayList<String> kl = u.getKeywordList();
+			for(String y:kl) {
+				TopicUnit o = new TopicUnit(y);
+				addTopic(o);
+			}
+			topiclist.remove(j);
 		}
 	}
 	

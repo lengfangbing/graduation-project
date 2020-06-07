@@ -37,6 +37,7 @@ public class Topic {
 		for(String x:l) {
 //			int n = m.get(x);
 			TopicUnit t = TopicDatabase.getTopic(x);
+			if(t == null) continue;
 //			String name = t.getTopicName();
 //			if(keywordnumber.containsKey(name)) {
 //				int n2 = keywordnumber.get(name);

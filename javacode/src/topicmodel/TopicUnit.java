@@ -18,13 +18,14 @@ public class TopicUnit{
 		return keyword.contains(s);
 	}
 	
-	public void addKeyWord(String s) {
-		keyword.add(s);
+	public void addKeyWord(String s) {//去重
+		ArrayList<String> l = TopicDatabase.getBanList();
+		if(!l.contains(s) && !keyword.contains(s))
+			keyword.add(s);
 	}
-	public void addKeyWord(ArrayList<String> l) {//去重
+	public void addKeyWord(ArrayList<String> l) {
 		for(String x:l) {
-			if(!keyword.contains(x))
-				keyword.add(x);
+			addKeyWord(x);
 		}
 	}
 	
